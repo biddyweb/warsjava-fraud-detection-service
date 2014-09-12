@@ -1,10 +1,8 @@
 package pl.warsjawa.microservice
-
 import com.ofg.infrastructure.environment.EnvironmentSetupVerifier
 import groovy.transform.TypeChecked
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
-import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.EnableAspectJAutoProxy
@@ -17,7 +15,6 @@ import static com.ofg.config.BasicProfiles.*
 @EnableAutoConfiguration
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @ComponentScan(basePackages = ["pl.warsjawa.microservice", "pl.warsjawa.fraud"])
-@EnableCaching
 @EnableAsync
 class Application {
 
