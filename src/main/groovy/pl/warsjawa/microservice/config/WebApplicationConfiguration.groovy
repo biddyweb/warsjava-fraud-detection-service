@@ -1,4 +1,4 @@
-package com.ofg.microservice.config
+package pl.warsjawa.microservice.config
 
 import com.ofg.infrastructure.config.WebAppConfiguration
 import org.springframework.context.annotation.Configuration

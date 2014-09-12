@@ -41,7 +41,7 @@ uploadArchives {
         }
         pom.version = currentVersion
         pom.artifactId = project.name
-        pom.groupId = 'com.ofg'
+        pom.groupId = 'pl.warsjava'
     }
 }
 
@@ -162,14 +162,6 @@ if(project.hasProperty("coverage")) {
         ignoreFailures = true
         jacoco {
             excludes = ['*Configuration']
-        }
-    }
-
-    sonarRunner {
-        sonarProperties {
-            //TODO: fill this
-            property "sonar.host.url", ""
-            property "sonar.junit.reportsPath", "build/test-results"
         }
     }
 
