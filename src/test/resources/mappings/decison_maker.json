@@ -1,0 +1,12 @@
+{
+    "request": {
+        "method": "PUT",
+        "urlPattern": "/decision_maker/loanApplication/[0-9]+"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/vnd.pl.warsjawa.fraud-detection-service.v1+json"
+        }
+    }
+}

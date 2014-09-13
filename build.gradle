@@ -31,7 +31,7 @@ ext {
     springVersion = '4.1.0.RELEASE'
     jacksonMapper = '1.9.13'
     aspectjVersion = '1.8.2'
-    microDepsSpringVersion = '0.4.0'
+    microDepsSpringVersion = '0.4.1'
 }
 
 uploadArchives {
