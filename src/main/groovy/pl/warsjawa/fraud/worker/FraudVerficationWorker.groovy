@@ -1,10 +1,11 @@
 package pl.warsjawa.fraud.worker
-
 import com.ofg.infrastructure.web.resttemplate.fluent.ServiceRestClient
 import groovy.transform.CompileStatic
 import groovy.transform.PackageScope
 import groovy.util.logging.Slf4j
 import pl.warsjawa.fraud.Dependencies
+
+import static pl.warsjawa.fraud.FraudApi.DECISION_MAKER_V1
 
 @CompileStatic
 @Slf4j
@@ -22,10 +23,14 @@ class FraudVerficationWorker implements PropagationWorker {
     @Override
     void checkAndPropagate(String loanApplicationId, String loanApplicationDetails) {
         FraudResult fraudResult = fraudResultBuilder.buildFraudResult(loanApplicationDetails)
+        log.info("Sending a request to [$Dependencies.DECISION_MAKER] to decide whether to grant a loan")
         serviceRestClient.forService(Dependencies.DECISION_MAKER.toString())
                 .put()
-                .onUrl("loanApplication/$loanApplicationId")
+                .onUrl("/api/loanApplication/$loanApplicationId")
                 .body(buildBody(fraudResult))
+                .withHeaders()
+                    .contentType(DECISION_MAKER_V1)
+                .andExecuteFor()
                 .ignoringResponse()
     }
 

@@ -39,6 +39,8 @@ class LoanApplicationController {
     @ApiOperation(value = "Async verification of loan application by given loanApplicationId",
             notes = "This will asynchronously verify what's the probability of the user to be a fraud and will call LoanApplicationDecisionMaker")
     Callable<Void> checkIfUserIsFraud(@PathVariable @NotNull String loanApplicationId, @RequestBody @NotNull String loanApplicationDetails) {
-        propagationWorker.checkAndPropagate(loanApplicationId, loanApplicationDetails)
+        return {
+            propagationWorker.checkAndPropagate(loanApplicationId, loanApplicationDetails)
+        }
     }
 }
