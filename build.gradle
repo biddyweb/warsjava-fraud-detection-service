@@ -95,6 +95,9 @@ dependencies {
     compile 'org.apache.ivy:ivy:2.3.0'
     compile 'org.codehaus.gpars:gpars:1.2.1'
     compile 'net.sf.ehcache:ehcache:2.8.3'
+    compile 'org.projectreactor:reactor-core:1.0.1.RELEASE'
+    compile 'org.projectreactor:reactor-groovy:1.0.1.RELEASE'
+    compile 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
     // microservices
     compile 'com.ofg:micro-infra-spring:0.2.2'
 
