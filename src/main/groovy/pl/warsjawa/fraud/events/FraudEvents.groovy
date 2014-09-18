@@ -3,8 +3,9 @@ package pl.warsjawa.fraud.events
 import groovy.transform.CompileStatic
 
 @CompileStatic
-enum FraudEvents {
-    CLIENT_IS_OK,
-    CLIENT_IS_FISHY,
-    CLIENT_IS_FRAUD
+class FraudEvents {
+
+    public static final String CLIENT_IS_OK = 'clientOk'
+    public static final String CLIENT_IS_FISHY = 'clientFishy'
+    public static final String CLIENT_IS_FRAUD = 'clientFraud'
 }

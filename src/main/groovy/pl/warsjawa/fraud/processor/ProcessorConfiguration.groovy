@@ -10,17 +10,17 @@ import reactor.core.Reactor
 @Configuration
 class ProcessorConfiguration {
 
-    @Bean(initMethod = 'subscribeForFraudEvent')
+    @Bean
     OkClientProcessor okClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient) {
         return new OkClientProcessor(reactor, serviceRestClient)
     }
 
-    @Bean(initMethod = 'subscribeForFraudEvent')
+    @Bean
     FishyClientProcessor fishyClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient) {
         return new FishyClientProcessor(reactor, serviceRestClient)
     }
 
-    @Bean(initMethod = 'subscribeForFraudEvent')
+    @Bean
     FraudClientProcessor fraudClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient) {
         return new FraudClientProcessor(reactor, serviceRestClient)
     }

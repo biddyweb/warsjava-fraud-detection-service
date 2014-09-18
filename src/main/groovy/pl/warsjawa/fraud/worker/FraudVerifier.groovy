@@ -1,8 +1,9 @@
 package pl.warsjawa.fraud.worker
+
 import groovy.json.JsonSlurper
 import groovy.transform.PackageScope
 import groovy.util.logging.Slf4j
-import pl.warsjawa.fraud.events.FraudEvents
+import com.ofg.infrastructure.reactor.event.ReactorEvent
 import reactor.core.Reactor
 
 import static pl.warsjawa.fraud.events.FraudEvents.*
@@ -21,10 +22,11 @@ class FraudVerifier {
         def root = new JsonSlurper().parseText(loanApplicationDetails)
         String job = root.job.toLowerCase()
         log.debug("Checking job [$job]")
-        reactor.notify(for: eventNameBasedOnJob(job), data: [loanApplicationDetails: loanApplicationDetails, loanApplicationId: loanApplicationId])
+        reactor.notify(eventNameBasedOnJob(job), ReactorEvent.wrap([loanApplicationDetails: loanApplicationDetails, loanApplicationId: loanApplicationId]))
     }
 
-    private FraudEvents eventNameBasedOnJob(String job) {
+
+    private String eventNameBasedOnJob(String job) {
         switch (job) {
             case 'it':
                 return CLIENT_IS_OK
