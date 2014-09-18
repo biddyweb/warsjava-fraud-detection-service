@@ -1,8 +1,9 @@
 package pl.warsjawa.fraud.worker
+
 import groovy.json.JsonSlurper
 import groovy.transform.PackageScope
 import groovy.util.logging.Slf4j
-import pl.warsjawa.fraud.reactor.ReactorEvent
+import com.ofg.infrastructure.reactor.event.ReactorEvent
 import reactor.core.Reactor
 
 import static pl.warsjawa.fraud.events.FraudEvents.*
