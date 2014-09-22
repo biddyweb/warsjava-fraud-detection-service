@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.EnableAspectJAutoProxy
 import org.springframework.scheduling.annotation.EnableAsync
+import reactor.spring.context.config.EnableReactor
 
 import static com.ofg.config.BasicProfiles.*
 
@@ -17,6 +18,7 @@ import static com.ofg.config.BasicProfiles.*
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @ComponentScan(basePackages = ["pl.warsjawa.microservice", "pl.warsjawa.fraud"])
 @EnableAsync
+@EnableReactor
 class Application {
 
     static void main(String[] args) {

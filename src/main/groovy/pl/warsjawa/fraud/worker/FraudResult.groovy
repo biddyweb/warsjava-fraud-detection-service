@@ -16,7 +16,6 @@ class FraudResult {
         this.jobFraudResult = fraudResult.jobFraudResult
     }
 
-
     static enum JobFraudResult {
         OK, FRAUD, VERIFICATION_REQUIRED
     }
