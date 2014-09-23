@@ -39,7 +39,7 @@ ext {
 
 uploadArchives {
     repositories.mavenDeployer {
-        repository(url: "http://nexus.warsjawa.uservices.pl:8081/nexus/repositories/Pipeline") {
+        repository(url: "http://nexus.warsjawa.uservices.pl:8081/nexus/repositories/") {
             authentication(userName: 'admin', password: 'admin123')
         }
         pom.version = currentVersion
