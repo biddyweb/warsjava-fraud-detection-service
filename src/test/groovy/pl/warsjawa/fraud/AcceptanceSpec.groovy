@@ -2,6 +2,7 @@ package pl.warsjawa.fraud
 import com.github.tomakehurst.wiremock.client.UrlMatchingStrategy
 import org.springframework.http.MediaType
 import pl.warsjawa.base.MicroserviceMvcWiremockSpec
+import spock.lang.Ignore
 import spock.lang.Unroll
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*
@@ -12,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static pl.warsjawa.fraud.Dependencies.DECISION_MAKER
 import static pl.warsjawa.fraud.FraudApi.*
 
+@Ignore
 class AcceptanceSpec extends MicroserviceMvcWiremockSpec {
 
     public static final String IT_LOAN_APPLICATION_ID = '123123123123'

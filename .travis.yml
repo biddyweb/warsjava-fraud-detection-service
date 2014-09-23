@@ -16,5 +16,6 @@ env:
 - TERM=dumb
 
 after_success:
+- ./gradlew clean build uploadArchives
 - ./gradlew test jacocoTestReport coveralls -Pcoverage
 
