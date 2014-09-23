@@ -16,7 +16,7 @@ import static pl.warsjawa.fraud.events.FraudEvents.CLIENT_IS_OK
 @Slf4j
 @CompileStatic
 @PackageScope
-class OkClientProcessor implements BodyBuilding {
+class OkClientProcessor implements BodyBuilding, ClientProcessing {
 
     final Reactor reactor
     final ServiceRestClient serviceRestClient
@@ -26,6 +26,7 @@ class OkClientProcessor implements BodyBuilding {
         this.serviceRestClient = serviceRestClient
     }
 
+    @Override
     @Selector(CLIENT_IS_OK)
     void subscribeForFraudEvent(Event<Map<String, String>> event) {
         Map<String, String> data = event.data
@@ -43,7 +44,7 @@ class OkClientProcessor implements BodyBuilding {
     }
 
     /**
-     * Reactor needs to have this field accessable explicitly
+     * Reactor needs to have this field accessible explicitly
      */
     Reactor getReactor() {
         return reactor

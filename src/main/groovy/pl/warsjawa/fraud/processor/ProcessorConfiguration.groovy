@@ -1,5 +1,6 @@
 package pl.warsjawa.fraud.processor
 
+import com.codahale.metrics.MetricRegistry
 import com.ofg.infrastructure.web.resttemplate.fluent.ServiceRestClient
 import groovy.transform.CompileStatic
 import org.springframework.context.annotation.Bean
@@ -23,5 +24,10 @@ class ProcessorConfiguration {
     @Bean
     FraudClientProcessor fraudClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient) {
         return new FraudClientProcessor(reactor, serviceRestClient)
+    }
+
+    @Bean
+    ProcessingTimeMetricAspect processingTimeMetricAspect(MetricRegistry metricRegistry) {
+        return new ProcessingTimeMetricAspect(metricRegistry)
     }
 }

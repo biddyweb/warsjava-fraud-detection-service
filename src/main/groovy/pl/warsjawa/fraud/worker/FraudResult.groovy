@@ -1,9 +1,7 @@
 package pl.warsjawa.fraud.worker
 import groovy.transform.CompileStatic
-import groovy.transform.PackageScope
 
 @CompileStatic
-@PackageScope
 class FraudResult {
 
     final JobFraudResult jobFraudResult

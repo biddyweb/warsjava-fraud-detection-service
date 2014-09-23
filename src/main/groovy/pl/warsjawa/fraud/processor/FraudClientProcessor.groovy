@@ -16,7 +16,7 @@ import static pl.warsjawa.fraud.events.FraudEvents.CLIENT_IS_FRAUD
 @Slf4j
 @CompileStatic
 @PackageScope
-class FraudClientProcessor implements BodyBuilding {
+class FraudClientProcessor implements BodyBuilding, ClientProcessing {
     final Reactor reactor
     final ServiceRestClient serviceRestClient
 
@@ -25,6 +25,7 @@ class FraudClientProcessor implements BodyBuilding {
         this.serviceRestClient = serviceRestClient
     }
 
+    @Override
     @Selector(CLIENT_IS_FRAUD)
     void subscribeForFraudEvent(Event<Map<String, String>> event) {
         Map<String, String> data = event.data
