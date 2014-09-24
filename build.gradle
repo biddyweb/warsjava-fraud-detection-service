@@ -21,7 +21,7 @@ apply plugin: 'maven'
 apply plugin: 'com.ofg.uptodate'
 
 ext {
-    buildNrLoc = System.getProperty('VERSION') ?: "CD-000"
+    buildNrLoc = System.getenv()['VERSION'] ?: "CD-000"
     currentVersion = "${buildNrLoc}"
 
     groovyVersion = '2.3.6'
@@ -42,8 +42,8 @@ uploadArchives {
             authentication(userName: 'admin', password: 'admin123')
         }
         pom.version = currentVersion
-        pom.artifactId = System.getProperty('ARTIFACT')
-        pom.groupId = System.getProperty('GROUP_ID')
+        pom.artifactId = System.getenv()['ARTIFACT']
+        pom.groupId = System.getenv()['GROUP_ID']
     }
 }
 
