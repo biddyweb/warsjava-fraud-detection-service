@@ -21,9 +21,8 @@ apply plugin: 'maven'
 apply plugin: 'com.ofg.uptodate'
 
 ext {
-    versionPrefix = "CD"
-    buildNrLoc = project.hasProperty('buildNr') ? "${buildNr}" : "000"
-    currentVersion = "${versionPrefix}-${buildNrLoc}"
+    buildNrLoc = System.getProperty('VERSION') ?: "CD-000"
+    currentVersion = "${buildNrLoc}"
 
     groovyVersion = '2.3.6'
     spockVersion = '0.7-groovy-2.0'
@@ -43,8 +42,8 @@ uploadArchives {
             authentication(userName: 'admin', password: 'admin123')
         }
         pom.version = currentVersion
-        pom.artifactId = project.name
-        pom.groupId = 'pl.warsjava'
+        pom.artifactId = System.getProperty('ARTIFACT')
+        pom.groupId = System.getProperty('GROUP_ID')
     }
 }
 
