@@ -6,7 +6,7 @@ jdk:
 env:
   global:
     - JAVA_OPTS=-Xmx512m
-    - GROUP_ID="pl.warsjawa"
+    - GROUP_ID="test.pl.warsjawa"
     - ARTIFACT="warsjava-fraud-detection-service"
     - VERSION=CD-${TRAVIS_BUILD_NUMBER}
     - RUNDECK_URL="http://rundeck.warsjawa.uservices.pl:4440"
