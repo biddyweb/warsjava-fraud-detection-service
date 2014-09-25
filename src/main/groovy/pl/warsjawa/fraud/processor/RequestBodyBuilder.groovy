@@ -15,6 +15,8 @@ class RequestBodyBuilder {
             fraudStatus fraudResult.jobFraudResult
             job root.job
             amount root.amount
+            firstName root.firstName
+            lastName root.lastName
         }
 
         return builder.toString()
