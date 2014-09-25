@@ -10,18 +10,21 @@ import reactor.core.Reactor
 import reactor.event.Event
 import reactor.spring.annotation.Selector
 
+import static pl.warsjawa.fraud.worker.FraudResult.JobFraudResult.*
 import static pl.warsjawa.fraud.FraudApi.DECISION_MAKER_V1
 import static pl.warsjawa.fraud.events.FraudEvents.CLIENT_IS_FISHY
 
 @Slf4j
 @CompileStatic
 @PackageScope
-class FishyClientProcessor implements BodyBuilding, ClientProcessing {
+class FishyClientProcessor implements ClientProcessing {
 
     final Reactor reactor
     final ServiceRestClient serviceRestClient
+    private final RequestBodyBuilder requestBodyBuilder
 
-    FishyClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient) {
+    FishyClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient, RequestBodyBuilder requestBodyBuilder) {
+        this.requestBodyBuilder = requestBodyBuilder
         this.reactor = reactor
         this.serviceRestClient = serviceRestClient
     }
@@ -36,9 +39,9 @@ class FishyClientProcessor implements BodyBuilding, ClientProcessing {
         serviceRestClient.forService(Dependencies.DECISION_MAKER.toString())
                 .put()
                 .onUrl("/api/loanApplication/$loanApplicationId")
-                .body(buildBody(new FraudResult(FraudResult.JobFraudResult.VERIFICATION_REQUIRED)))
+                .body(requestBodyBuilder.buildDecisionRequestBody(data['loanApplicationDetails'], new FraudResult(VERIFICATION_REQUIRED)))
                 .withHeaders()
-                .contentType(DECISION_MAKER_V1)
+                    .contentType(DECISION_MAKER_V1)
                 .andExecuteFor()
                 .ignoringResponse()
     }

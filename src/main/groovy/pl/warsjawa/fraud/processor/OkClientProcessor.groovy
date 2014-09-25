@@ -12,16 +12,19 @@ import reactor.spring.annotation.Selector
 
 import static pl.warsjawa.fraud.FraudApi.DECISION_MAKER_V1
 import static pl.warsjawa.fraud.events.FraudEvents.CLIENT_IS_OK
+import static pl.warsjawa.fraud.worker.FraudResult.JobFraudResult.OK
 
 @Slf4j
 @CompileStatic
 @PackageScope
-class OkClientProcessor implements BodyBuilding, ClientProcessing {
+class OkClientProcessor implements ClientProcessing {
 
     final Reactor reactor
     final ServiceRestClient serviceRestClient
+    private final RequestBodyBuilder requestBodyBuilder
 
-    OkClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient) {
+    OkClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient, RequestBodyBuilder requestBodyBuilder) {
+        this.requestBodyBuilder = requestBodyBuilder
         this.reactor = reactor
         this.serviceRestClient = serviceRestClient
     }
@@ -36,9 +39,9 @@ class OkClientProcessor implements BodyBuilding, ClientProcessing {
         serviceRestClient.forService(Dependencies.DECISION_MAKER.toString())
                 .put()
                 .onUrl("/api/loanApplication/$loanApplicationId")
-                .body(buildBody(new FraudResult(FraudResult.JobFraudResult.OK)))
+                .body(requestBodyBuilder.buildDecisionRequestBody(data['loanApplicationDetails'], new FraudResult(OK)))
                 .withHeaders()
-                .contentType(DECISION_MAKER_V1)
+                    .contentType(DECISION_MAKER_V1)
                 .andExecuteFor()
                 .ignoringResponse()
     }

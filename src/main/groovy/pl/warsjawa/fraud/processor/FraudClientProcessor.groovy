@@ -10,17 +10,20 @@ import reactor.core.Reactor
 import reactor.event.Event
 import reactor.spring.annotation.Selector
 
+import static pl.warsjawa.fraud.worker.FraudResult.JobFraudResult.*
 import static pl.warsjawa.fraud.FraudApi.DECISION_MAKER_V1
 import static pl.warsjawa.fraud.events.FraudEvents.CLIENT_IS_FRAUD
 
 @Slf4j
 @CompileStatic
 @PackageScope
-class FraudClientProcessor implements BodyBuilding, ClientProcessing {
+class FraudClientProcessor implements ClientProcessing {
     final Reactor reactor
     final ServiceRestClient serviceRestClient
+    private final RequestBodyBuilder requestBodyBuilder
 
-    FraudClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient) {
+    FraudClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient, RequestBodyBuilder requestBodyBuilder) {
+        this.requestBodyBuilder = requestBodyBuilder
         this.reactor = reactor
         this.serviceRestClient = serviceRestClient
     }
@@ -35,9 +38,9 @@ class FraudClientProcessor implements BodyBuilding, ClientProcessing {
         serviceRestClient.forService(Dependencies.DECISION_MAKER.toString())
                 .put()
                 .onUrl("/api/loanApplication/$loanApplicationId")
-                .body(buildBody(new FraudResult(FraudResult.JobFraudResult.FRAUD)))
+                .body(requestBodyBuilder.buildDecisionRequestBody(data['loanApplicationDetails'], new FraudResult(FRAUD)))
                 .withHeaders()
-                .contentType(DECISION_MAKER_V1)
+                    .contentType(DECISION_MAKER_V1)
                 .andExecuteFor()
                 .ignoringResponse()
     }

@@ -13,17 +13,17 @@ class ProcessorConfiguration {
 
     @Bean
     OkClientProcessor okClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient) {
-        return new OkClientProcessor(reactor, serviceRestClient)
+        return new OkClientProcessor(reactor, serviceRestClient, new RequestBodyBuilder())
     }
 
     @Bean
     FishyClientProcessor fishyClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient) {
-        return new FishyClientProcessor(reactor, serviceRestClient)
+        return new FishyClientProcessor(reactor, serviceRestClient, new RequestBodyBuilder())
     }
 
     @Bean
     FraudClientProcessor fraudClientProcessor(Reactor reactor, ServiceRestClient serviceRestClient) {
-        return new FraudClientProcessor(reactor, serviceRestClient)
+        return new FraudClientProcessor(reactor, serviceRestClient, new RequestBodyBuilder())
     }
 
     @Bean
