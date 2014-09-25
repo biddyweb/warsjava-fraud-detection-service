@@ -1,6 +1,8 @@
 Fraud Detection Service for Warsjava
 =======================
 
+## Description
+
 Example of a microservice that works on Spring Boot.
 
 ## Build status
