@@ -33,7 +33,7 @@ ext {
     microDepsSpringVersion = '0.4.1'
     reactorVersion = '1.1.4.RELEASE'
     springReactorVersion = '1.1.3.RELEASE'
-    microInfraSpringVersion = '0.4.0'
+    microInfraSpringVersion = '0.3.0'
 }
 
 uploadArchives {
