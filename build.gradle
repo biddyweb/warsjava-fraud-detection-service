@@ -93,7 +93,7 @@ dependencies {
     compile "org.aspectj:aspectjrt:$aspectjVersion"
     compile 'org.apache.ivy:ivy:2.3.0'
     compile 'org.codehaus.gpars:gpars:1.2.1'
-    compile 'net.sf.ehcache:ehcache:2.8.3'
+    compile 'net.sf.ehcache:ehcache:2.8.4'
     compile "org.projectreactor:reactor-core:$reactorVersion"
     compile "org.projectreactor:reactor-spring:1.0.1.RELEASE"
     // microservices
