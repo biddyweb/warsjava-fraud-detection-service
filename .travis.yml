@@ -1,5 +1,8 @@
 language: groovy
 
+jdk:
+  - oraclejdk8
+
 env:
   global:
     - JAVA_OPTS=-Xmx512m
@@ -17,15 +20,11 @@ before_install:
 install:
   - sudo apt-get install curl
 
-jdk:
-- oraclejdk8
-
 script:
-- ./gradlew build --stacktrace
+  - ./gradlew build --stacktrace
 
 after_success:
-- ./gradlew clean build uploadArchives
-- 'curl -s -H "X-Rundeck-Auth-Token: ${RUNDECK_AUTH_TOKEN}" --data-urlencode "argString=${RUNDECK_JOB_ARGS}" "${RUNDECK_URL}/api/1/job/${RUNDECK_JOB_ID}/run?format=json"'
-- ./gradlew test jacocoTestReport coveralls -Pcoverage
-- ./gradlew uptodate
-
+  - ./gradlew clean build uploadArchives
+  - 'curl -s -H "X-Rundeck-Auth-Token: ${RUNDECK_AUTH_TOKEN}" --data-urlencode "argString=${RUNDECK_JOB_ARGS}" "${RUNDECK_URL}/api/1/job/${RUNDECK_JOB_ID}/run?format=json"'
+  - ./gradlew test jacocoTestReport coveralls -Pcoverage
+  - ./gradlew uptodate
