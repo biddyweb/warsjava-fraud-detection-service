@@ -21,10 +21,10 @@ install:
   - sudo apt-get install curl
 
 script:
-  - ./gradlew build --stacktrace
+  - ./gradlew build --stacktrace -x test
 
 after_success:
-  - ./gradlew clean build uploadArchives
+  - ./gradlew clean build uploadArchives -x test
   - 'curl -s -H "X-Rundeck-Auth-Token: ${RUNDECK_AUTH_TOKEN}" --data-urlencode "argString=${RUNDECK_JOB_ARGS}" "${RUNDECK_URL}/api/1/job/${RUNDECK_JOB_ID}/run"'
   - ./gradlew test jacocoTestReport coveralls -Pcoverage
   - ./gradlew uptodate

@@ -42,8 +42,8 @@ uploadArchives {
             authentication(userName: 'admin', password: 'admin123')
         }
         pom.version = currentVersion
-        pom.artifactId = System.getenv()['ARTIFACT']
-        pom.groupId = System.getenv()['GROUP_ID']
+        pom.artifactId = System.getenv()['ARTIFACT'] ?: 'warsjawa-fraud-detection-service'
+        pom.groupId = System.getenv()['GROUP_ID'] ?: 'pl.warsjawa'
     }
 }
 
